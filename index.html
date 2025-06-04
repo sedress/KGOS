@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Sistema de Autenticación y CRUD</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div class="container">
+      <!-- Pantalla de Inicio -->
+       <div class="app-logo"><!-- Logo en la pantalla de inicio -->
+<img src="logo.png" alt="Logo KGOS" class="logo" />
+</div>
+      <div id="homeScreen" class="screen active">
+        <h1>Bienvenido al Sistema</h1>
+        <div class="btn-group">
+          <button class="btn" onclick="showScreen('registerScreen')">
+            Registrarse
+          </button>
+          <button class="btn" onclick="showScreen('loginScreen')">
+            Iniciar Sesión
+          </button>
+        </div>
+      </div>
+      
+     <div class="theme-toggle">
+  <button id="dark-mode-btn" class="theme-btn" title="Modo oscuro">🌙</button>
+  <button id="light-mode-btn" class="theme-btn" title="Modo claro">☀️</button>
+</div>
+
+
+      <!-- Pantalla de Registro -->
+      <div id="registerScreen" class="screen">
+        <h2>Crear Cuenta</h2>
+        <div id="registerAlert"></div>
+        <form id="registerForm">
+          <div class="form-group">
+            <label for="regName">Nombre completo:</label>
+            <input type="text" id="regName" required />
+          </div>
+          <div class="form-group">
+            <label for="regEmail">Email:</label>
+            <input type="email" id="regEmail" required />
+          </div>
+          <div class="form-group">
+            <label for="regPassword">Contraseña:</label>
+            <input type="password" id="regPassword" required />
+          </div>
+          <div class="btn-group">
+            <button type="submit" class="btn">Registrarse</button>
+            <button
+              type="button"
+              class="btn"
+              onclick="showScreen('homeScreen')"
+            >
+              Volver
+            </button>
+          </div>
+        </form>
+      </div>
+
+      <!-- Pantalla de Login -->
+      <div id="loginScreen" class="screen">
+        <h2>Iniciar Sesión</h2>
+        <div id="loginAlert"></div>
+        <form id="loginForm">
+          <div class="form-group">
+            <label for="loginEmail">Email:</label>
+            <input type="email" id="loginEmail" required />
+          </div>
+          <div class="form-group">
+            <label for="loginPassword">Contraseña:</label>
+            <input type="password" id="loginPassword" required />
+          </div>
+          <div class="btn-group">
+            <button type="submit" class="btn">Ingresar</button>
+            <button
+              type="button"
+              class="btn"
+              onclick="showScreen('homeScreen')"
+            >
+              Volver
+            </button>
+          </div>
+        </form>
+      </div>
+
+      <!-- Pantalla Principal (CRUD) -->
+      <div id="crudScreen" class="screen">
+        <div class="crud-header">
+          <h2> Gestión de Productos</h2>
+          <div>
+            <span class="user-info"
+              >Bienvenido, <span id="currentUser"></span
+            ></span>
+            <button class="btn" onclick="logout()">Cerrar Sesión</button>
+          </div>
+        </div>
+
+        <div id="crudAlert"></div>
+
+        <!-- Formulario para agregar/editar productos -->
+        <!-- Formulario para agregar/editar productos -->
+            <div class="form-producto">
+  <div class="form-group">
+            <form id="productForm">
+          <div class="form-group">
+            <label for="productName">Nombre del Producto:</label>
+            <input type="text" id="productName" required />
+          </div>
+          <div class="form-group">
+            <label for="productPrice">Precio:</label>
+            <input type="number" id="productPrice" step="0.01" required />
+          </div>
+          <div class="form-group">
+            <label for="productDescription">Descripción:</label>
+            <textarea id="productDescription" rows="3"></textarea>
+          </div>
+          <div class="btn-group">
+            <button type="submit" class="btn" id="productSubmitBtn">
+              Agregar Producto
+            </button>
+            <button
+              type="button"
+              class="btn"
+              id="cancelEditBtn"
+              onclick="cancelEdit()"
+              style="display: none"
+            >
+              Cancelar
+            </button>
+          </div>
+        </form>
+    <div class="form-group" style="display: flex; gap: 10px; margin-bottom: 15px;">
+  <input
+    type="text"
+    id="searchInput"
+    placeholder="🔎 Buscar producto por nombre..."
+    style="padding: 8px; flex: 1; border-radius: 8px;"
+  />
+  <button
+    type="button"
+    class="btn"
+    onclick="filtrarProductosPorNombre()"
+    style="padding: 8px 16px; border-radius: 8px; background-color: black; color: white; border: none; cursor: pointer;"
+  >
+    Buscar
+  </button>
+</div>
+
+
+        <!-- Tabla de productos -->
+        <div class="table-container">
+          <table>
+            <thead>
+              <tr>
+                <th>ID</th>
+                <th>Nombre</th>
+                <th>Precio</th>
+                <th>Descripción</th>
+                <th>Acciones</th>
+              </tr>
+            </thead>
+            <tbody id="productsTable"></tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <script src="script.js"></script>
+  </body>
+</html>
